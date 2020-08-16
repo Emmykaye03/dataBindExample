@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        debugger;
+
+        $.ajax({
+
+            type: "POST",
+
+            url: '@Url.Action("GetJsonData", "Home")',
+
+            data: "",
+
+            contentType: "application/json; charset=utf-8",
+
+            dataType: "json",
+
+            success: function (data) {
+
+                let output = data.map(i => "<tr><td>" + i.stockId + "</td><td>" + i.stockName + "</td><td>" + i.stockPrice + "</td></tr>");
+
+                $("#output").html(output);
+
+            }
+
+        });
+
+    });
+
+</script>
+
+<div class="text-center">
+
+    <h1 class="display-4">Stock List</h1>
+
+    <table class="table table-bordered">
+
+        <tr class="table-head">
+
+            <th>Stock Id</th>
+
+            <th> Stock Name</th>
+
+            <th> Stock Price</th>
+
+        </tr>
+
+        <tbody id="output">
+
+    </table>
+
+</div>
